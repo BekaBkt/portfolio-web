@@ -19,7 +19,7 @@ export const translations = {
       viewCode: "Посмотреть код / проект",
       cards: [
         {
-          title: "Absalute",
+          title: "Absolute",
           desc: "Разработка современного и быстрого сайта для бизнеса. Адаптивная верстка и продуманный UI/UX.",
           techDesc: "Оптимизация рендеринга",
         },
@@ -107,7 +107,7 @@ export const translations = {
       viewCode: "View code / project",
       cards: [
         {
-          title: "Absalute",
+          title: "Absolute",
           desc: "Development of a fast, modern business website. Fully responsive layout with thoughtful UI/UX.",
           techDesc: "Rendering Optimization",
         },
