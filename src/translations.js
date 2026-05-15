@@ -24,14 +24,14 @@ export const translations = {
           techDesc: "Оптимизация рендеринга",
         },
         {
+          title: "Cosmo Code Studio",
+          desc: "Цифровая экосистема для digital-агентства. В роли технического сооснователя спроектировал платформу с нуля. Проект находится на стадии подготовки к публичному запуску.",
+          techDesc: "МАСШТАБИРУЕМАЯ АРХИТЕКТУРА",
+        },
+        {
           title: "Era Ophthalmica",
           desc: "Корпоративный сайт для медицинской клиники. Строгий дизайн и удобная навигация для пациентов.",
           techDesc: "Адаптивная архитектура",
-        },
-        {
-          title: "The Fifth Team",
-          desc: "Разработка сложного веб-приложения и интерактивной панели управления (dashboard).",
-          techDesc: "Интеграция Firebase API",
         },
         {
           title: "PDW",
@@ -112,14 +112,14 @@ export const translations = {
           techDesc: "Rendering Optimization",
         },
         {
+          title: "Cosmo Code Studio",
+          desc: "Digital ecosystem for a web development agency. As a Technical Co-founder, I engineered the platform from scratch, currently preparing for a public soft launch.",
+          techDesc: "SCALABLE ARCHITECTURE",
+        },
+        {
           title: "Era Ophthalmica",
           desc: "Corporate website for a medical clinic. Strict, professional design with seamless patient navigation.",
           techDesc: "Responsive Architecture",
-        },
-        {
-          title: "The Fifth Team",
-          desc: "Development of a complex web application featuring a fully interactive analytics dashboard.",
-          techDesc: "Firebase API Integration",
         },
         {
           title: "PDW",

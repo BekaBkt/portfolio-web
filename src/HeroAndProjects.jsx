@@ -35,6 +35,7 @@ const techColors = {
   "Web App": "bg-indigo-500/10 border-indigo-500/30 text-indigo-400",
   Frontend: "bg-rose-500/10 border-rose-500/30 text-rose-400",
   CMS: "bg-gray-500/10 border-gray-500/30 text-gray-400",
+  "Framer Motion": "bg-pink-500/10 border-pink-500/30 text-pink-400",
 };
 
 function TechBadge({ tech }) {
@@ -83,16 +84,16 @@ const baseProjects = [
     glow: "hover:shadow-[0_0_32px_rgba(99,102,241,0.18)]",
   },
   {
-    image: "/screenshots/era-ophthalmica.jpg",
-    tags: ["Web Development", "UI/UX"],
-    link: "https://www.eraophthalmica.com/",
+    image: "/screenshots/cosmo.jpg",
+    tags: ["React", "Tailwind CSS", "Framer Motion"],
+    link: "https://www.cosmocode.studio/",
     borderHover: "hover:border-purple-500/50",
     glow: "hover:shadow-[0_0_32px_rgba(168,85,247,0.18)]",
   },
   {
-    image: "/screenshots/fifth-team.jpg",
-    tags: ["React", "Firebase", "Web App"],
-    link: "https://thefifthteam.firebaseapp.com/#/app/dashboard",
+    image: "/screenshots/era-ophthalmica.jpg",
+    tags: ["Web Development", "UI/UX"],
+    link: "https://www.eraophthalmica.com/",
     borderHover: "hover:border-cyan-500/50",
     glow: "hover:shadow-[0_0_32px_rgba(34,211,238,0.18)]",
   },

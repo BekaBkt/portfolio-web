@@ -26,12 +26,12 @@ function LanguageSwitcher({ lang, setLang }) {
           backdrop-blur-md cursor-pointer select-none
         "
       >
-        <span className={`text-xs font-bold tracking-widest transition-colors ${lang === 'ru' ? 'text-white' : 'text-white/40'}`}>
-          RU
-        </span>
-        <span className="mx-1.5 text-white/20 text-[10px]">/</span>
         <span className={`text-xs font-bold tracking-widest transition-colors ${lang === 'en' ? 'text-white' : 'text-white/40'}`}>
           EN
+        </span>
+        <span className="mx-1.5 text-white/20 text-[10px]">/</span>
+        <span className={`text-xs font-bold tracking-widest transition-colors ${lang === 'ru' ? 'text-white' : 'text-white/40'}`}>
+          RU
         </span>
       </motion.button>
     </div>
@@ -39,7 +39,7 @@ function LanguageSwitcher({ lang, setLang }) {
 }
 
 function App() {
-  const [lang, setLang] = useState('ru');
+  const [lang, setLang] = useState('en');
 
   return (
     <main className="relative">
