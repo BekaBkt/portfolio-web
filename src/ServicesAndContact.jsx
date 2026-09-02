@@ -273,7 +273,7 @@ export default function ServicesAndContact({ lang = 'ru' }) {
 
               {/* WhatsApp */}
               <motion.a
-                href={`https://wa.me/77068669099?text=${encodeURIComponent(whatsappText)}`}
+                href={`https://wa.me/77754202783?text=${encodeURIComponent(whatsappText)}`}
                 target="_blank"
                 rel="noreferrer"
                 whileHover={{ scale: 1.02, x: 4 }}
@@ -287,7 +287,7 @@ export default function ServicesAndContact({ lang = 'ru' }) {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-white font-semibold text-base">WhatsApp</p>
-                  <p className="text-emerald-400/80 text-sm mt-0.5">+7 706 866 90 99</p>
+                  <p className="text-emerald-400/80 text-sm mt-0.5">+7 775 420 27 83</p>
                 </div>
                 <ChevronRight size={18} className="text-emerald-400/50 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all duration-300" />
               </motion.a>
