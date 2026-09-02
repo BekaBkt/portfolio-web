@@ -19,7 +19,7 @@ export const translations = {
       viewCode: "Посмотреть проект",
       featuredBadge: "Флагманский проект",
       ozzy: {
-        title: "Ozzy",
+        title: "OZZY",
         tagline: "Интеллектуальный AI-компаньон и реактивный интерфейс",
         desc: "Built with React, Rive (complex state-machine animations), LLM integrations, Cursor, and Claude.",
         longDesc: "Интерактивное приложение с живым AI-персонажем, управляемым стейт-машинами Rive, стримингом ответов больших языковых моделей (LLM) и надежным клиентским стейтом.",
@@ -100,7 +100,7 @@ export const translations = {
       viewCode: "View project",
       featuredBadge: "Featured Flagship Project",
       ozzy: {
-        title: "Ozzy",
+        title: "OZZY",
         tagline: "Interactive AI Companion & Agentic Assistant",
         desc: "Built with React, Rive (complex state-machine animations), LLM integrations, Cursor, and Claude.",
         longDesc: "An intelligent companion application featuring an expressive interactive avatar powered by complex Rive state-machine animation trees, low-latency LLM streaming pipelines, and reactive state management.",
