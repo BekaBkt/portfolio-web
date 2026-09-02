@@ -190,7 +190,7 @@ function FeaturedOzzyCard({ t }) {
         {/* Title & Tagline */}
         <div>
           <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight flex items-center justify-center gap-3">
-            <span className="font-jellee text-[#47A659] tracking-normal">{ozzy.title}</span>
+            <span className="font-jellee font-normal text-[#47A659] tracking-normal">{ozzy.title}</span>
             <span className="text-xs font-mono font-normal px-2.5 py-0.5 rounded-md bg-[#47A659]/15 text-[#47A659] border border-[#47A659]/30">v1.0</span>
           </h3>
           <p className="text-purple-300/90 font-medium text-base sm:text-lg mt-2">

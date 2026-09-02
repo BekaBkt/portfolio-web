@@ -4,13 +4,13 @@
 @font-face {
   font-family: 'Jellee';
   src: url('/Fonts/Jellee-Roman.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 .font-jellee {
-  font-family: 'Jellee', cursive, sans-serif;
+  font-family: 'Jellee', sans-serif !important;
 }
 
 * {
