@@ -27,7 +27,7 @@ export const translations = {
         appStoreTop: "Download on the",
         appStoreBottom: "App Store",
         tags: ["React", "Rive", "LLM APIs", "Cursor", "Claude", "TypeScript", "Tailwind CSS"],
-        link: "https://apps.apple.com",
+        link: "https://apps.apple.com/kz/app/ozzy-adhd-focus-pal/id6760987195",
       },
       cards: [
         {
@@ -108,7 +108,7 @@ export const translations = {
         appStoreTop: "Download on the",
         appStoreBottom: "App Store",
         tags: ["React", "Rive", "LLM APIs", "Cursor", "Claude", "TypeScript", "Tailwind CSS"],
-        link: "https://apps.apple.com",
+        link: "https://apps.apple.com/kz/app/ozzy-adhd-focus-pal/id6760987195",
       },
       cards: [
         {

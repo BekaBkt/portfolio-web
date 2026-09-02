@@ -250,7 +250,7 @@ function FeaturedOzzyCard({ t }) {
         {/* 3. Official Apple "Download on the App Store" Badge */}
         <div className="pt-3 flex justify-center w-full">
           <motion.a
-            href="https://apps.apple.com"
+            href={ozzy.link || "https://apps.apple.com/kz/app/ozzy-adhd-focus-pal/id6760987195"}
             target="_blank"
             rel="noreferrer"
             whileHover={{ scale: 1.05 }}
