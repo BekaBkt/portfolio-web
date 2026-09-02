@@ -1,20 +1,20 @@
 import { useRef, useState } from "react";
-import { motion, useInView, useAnimationFrame, useMotionValue } from "framer-motion";
-import { Mail, Video, Globe, Send, ChevronRight, PlayCircle, Users, Clapperboard, TrendingUp } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { Mail, Globe, Send, ChevronRight, MessageSquare, Terminal, Check, Copy } from "lucide-react";
 import { translations } from "./translations";
 
 /* ─────────── animation variants ─────────── */
 const fadeUp = {
-  hidden: { opacity: 0, y: 48 },
+  hidden: { opacity: 0, y: 40 },
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.12 },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 },
   }),
 };
 const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
+  visible: { transition: { staggerChildren: 0.1 } },
 };
 
 /* ─────────── animated section wrapper ─────────── */
@@ -34,138 +34,10 @@ function AnimatedSection({ children, className = "" }) {
   );
 }
 
-/* ─────────── video card ─────────── */
-const VIDEO_SRCS = [
-  "/videos/reel1.mp4",
-  "/videos/reel2.mp4",
-  "/videos/reel3.mp4",
-];
-
-function VideoCard({ index, t }) {
-  const videoRef = useRef(null);
-  const [playing, setPlaying] = useState(false);
-
-  const handleMouseEnter = () => {
-    videoRef.current?.play();
-    setPlaying(true);
-  };
-
-  const handleMouseLeave = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-    setPlaying(false);
-  };
-
-  return (
-    <motion.div
-      variants={fadeUp}
-      custom={index}
-      className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0d0d14] to-[#12101e] border border-purple-900/30 shadow-lg cursor-pointer"
-      style={{ aspectRatio: "9/16" }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      {/* purple glow ring on hover */}
-      <div
-        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
-        style={{ boxShadow: "0 0 40px 6px rgba(168,85,247,0.35), inset 0 0 0 1.5px rgba(168,85,247,0.5)" }}
-      />
-
-      {/* video element */}
-      <video
-        ref={videoRef}
-        src={VIDEO_SRCS[index]}
-        loop
-        muted
-        playsInline
-        className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-[1.03]"
-      />
-
-      {/* play overlay — visible when paused, fades out on hover */}
-      <div
-        className={`
-          absolute inset-0 z-20 flex flex-col items-center justify-center gap-3
-          bg-gradient-to-br from-black/70 to-purple-950/60 rounded-2xl
-          transition-opacity duration-400
-          ${playing ? "opacity-0 pointer-events-none" : "opacity-100"}
-        `}
-      >
-        <div className="relative">
-          <div className="absolute inset-0 rounded-full blur-xl bg-purple-500/40 scale-150" />
-          <PlayCircle
-            size={56}
-            className="relative text-purple-400"
-            style={{ filter: "drop-shadow(0 0 14px rgba(168,85,247,0.9))" }}
-            strokeWidth={1.5}
-          />
-        </div>
-        <span className="text-[11px] font-medium text-white/50 tracking-[0.15em] uppercase">
-          {t.video.hoverPlay}
-        </span>
-      </div>
-    </motion.div>
-  );
-}
-
-/* ─────────── Infinite Marquee ─────────── */
-const MARQUEE_ITEMS = [
-  "Яндекс Музыка",
-  "Жека Fatbelly",
-  "Арман Юсупов",
-  "Карина Оксукпаева",
-  "Айтим Жакупов",
-  "Jet.Kazakhstan",
-  "Tanuki",
-  "Ryadom.kz",
-  "Малика Хо",
-  "Данияр Джумадилов",
-];
-
-function InfiniteMarquee() {
-  const trackRef = useRef(null);
-  const x = useMotionValue(0);
-  const speed = 0.6; // px per frame
-
-  useAnimationFrame(() => {
-    if (!trackRef.current) return;
-    const halfW = trackRef.current.scrollWidth / 2;
-    const next = x.get() - speed;
-    x.set(next <= -halfW ? 0 : next);
-  });
-
-  const doubled = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
-
-  return (
-    <div className="relative w-full overflow-hidden py-4" aria-hidden>
-      {/* left fade */}
-      <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none" style={{ background: "linear-gradient(to right, #07070f, transparent)" }} />
-      {/* right fade */}
-      <div className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none" style={{ background: "linear-gradient(to left, #07070f, transparent)" }} />
-
-      <motion.div
-        ref={trackRef}
-        style={{ x }}
-        className="flex gap-3 w-max"
-      >
-        {doubled.map((name, i) => (
-          <span
-            key={i}
-            className="inline-flex items-center px-4 py-2 rounded-full bg-gray-800/50 border border-gray-700/70 text-gray-300 text-sm font-medium whitespace-nowrap backdrop-blur-sm select-none"
-          >
-            {name}
-          </span>
-        ))}
-      </motion.div>
-    </div>
-  );
-}
-
 /* ─────────── checkbox option ─────────── */
 function ServiceCheckbox({ id, label }) {
   return (
-    <label htmlFor={id} className="flex items-center gap-3 cursor-pointer group">
+    <label htmlFor={id} className="flex items-center gap-3 cursor-pointer group select-none">
       <div className="relative flex items-center justify-center">
         <input type="checkbox" id={id} name="service" value={label} className="peer sr-only" />
         <div
@@ -192,6 +64,24 @@ export default function ServicesAndContact({ lang = 'ru' }) {
   const t = translations[lang];
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText("b.bakytkaliyev@gmail.com");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = "b.bakytkaliyev@gmail.com";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -211,12 +101,16 @@ export default function ServicesAndContact({ lang = 'ru' }) {
       } else {
         alert(t.contact.errorMsg);
       }
-    } catch (error) {
+    } catch {
       alert(t.contact.errorMsg);
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  const whatsappText = lang === 'ru' 
+    ? "Здравствуйте, Бексултан! Хочу обсудить разработку Frontend / AI проекта..." 
+    : "Hello Bexultan! I'd like to discuss a Frontend / AI engineering project...";
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] font-sans py-24 px-4 sm:px-6 lg:px-8">
@@ -229,154 +123,8 @@ export default function ServicesAndContact({ lang = 'ru' }) {
         }}
       />
 
-      <div className="relative max-w-6xl mx-auto space-y-24">
-
-        {/* ══════════ BLOCK 1: Video Production ══════════ */}
-        <AnimatedSection>
-          {/* outer dark wrapper with subtle purple ambient */}
-          <div
-            className="relative rounded-3xl overflow-hidden"
-            style={{
-              background: "linear-gradient(135deg, #07070f 0%, #0d0a1a 60%, #07070f 100%)",
-              boxShadow: "0 0 120px 0px rgba(126,34,206,0.12), inset 0 0 0 1px rgba(126,34,206,0.12)",
-            }}
-          >
-            {/* subtle purple corner glow */}
-            <div
-              className="absolute -top-20 -right-20 w-80 h-80 rounded-full pointer-events-none"
-              style={{ background: "radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 70%)" }}
-            />
-            <div
-              className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full pointer-events-none"
-              style={{ background: "radial-gradient(circle, rgba(126,34,206,0.10) 0%, transparent 70%)" }}
-            />
-
-            <div className="relative z-10 px-6 sm:px-10 lg:px-16 pt-14 pb-16 space-y-12">
-
-              {/* pill badge */}
-              <motion.div variants={fadeUp} className="flex justify-center">
-                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-600/15 border border-purple-500/30 text-purple-400 text-xs font-semibold tracking-widest uppercase">
-                  <Video size={12} />
-                  {t.video.badge}
-                </span>
-              </motion.div>
-
-              {/* heading */}
-              <motion.h2
-                variants={fadeUp}
-                custom={1}
-                className="text-3xl sm:text-5xl lg:text-6xl font-bold text-center text-white leading-tight"
-              >
-                {t.video.titleStart}{" "}
-                <span
-                  className="text-transparent bg-clip-text"
-                  style={{ backgroundImage: "linear-gradient(90deg, #c084fc, #a855f7, #7c3aed)" }}
-                >
-                  {t.video.titleEnd}
-                </span>
-              </motion.h2>
-
-              {/* description */}
-              <motion.p
-                variants={fadeUp}
-                custom={2}
-                className="max-w-2xl mx-auto text-center text-gray-400 text-base sm:text-lg leading-relaxed"
-              >
-                {t.video.descP1}
-                <a
-                  href="https://www.instagram.com/souliiixce"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-purple-400 hover:text-purple-300 transition-colors font-semibold"
-                >
-                  {t.video.descLink}
-                </a>
-                {t.video.descP2}
-                <span className="text-white font-semibold">{t.video.descP3}</span>
-                {t.video.descP4}
-              </motion.p>
-
-              {/* ── STATS BLOCK ── */}
-              <motion.div
-                variants={fadeUp}
-                custom={3}
-                className="rounded-2xl border border-purple-800/30 overflow-hidden"
-                style={{ background: "rgba(88,28,135,0.08)" }}
-              >
-                {/* top: hero stat */}
-                <div
-                  className="flex flex-col items-center justify-center gap-3 py-10 px-6 border-b border-purple-800/20"
-                  style={{ background: "linear-gradient(180deg, rgba(126,34,206,0.13) 0%, transparent 100%)" }}
-                >
-                  <TrendingUp size={20} className="text-purple-400/70" />
-                  <div className="flex items-end gap-2">
-                    <span
-                      className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-none tracking-tight text-purple-400"
-                      style={{
-                        filter: "drop-shadow(0 0 28px rgba(168,85,247,0.7))",
-                        textShadow: "0 0 40px rgba(168,85,247,0.5)",
-                      }}
-                    >
-                      {t.video.stat1Number}
-                    </span>
-                  </div>
-                  <p className="text-gray-400 text-sm sm:text-base font-medium tracking-wide">
-                    {t.video.stat1Text}
-                  </p>
-                </div>
-
-                {/* bottom: two supporting stats */}
-                <div className="grid grid-cols-1 sm:grid-cols-2">
-                  {/* stat 2 */}
-                  <div className="flex items-start gap-4 p-6 sm:border-r border-purple-800/20">
-                    <div
-                      className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center"
-                      style={{ background: "rgba(168,85,247,0.15)", boxShadow: "0 0 16px rgba(168,85,247,0.2)" }}
-                    >
-                      <Users size={18} className="text-purple-400" />
-                    </div>
-                    <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-                      {t.video.stat2P1}
-                      <span className="text-white font-semibold">{t.video.stat2Highlight}</span>
-                      {t.video.stat2P2}
-                    </p>
-                  </div>
-                  {/* stat 3 */}
-                  <div className="flex items-start gap-4 p-6">
-                    <div
-                      className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center"
-                      style={{ background: "rgba(168,85,247,0.15)", boxShadow: "0 0 16px rgba(168,85,247,0.2)" }}
-                    >
-                      <Clapperboard size={18} className="text-purple-400" />
-                    </div>
-                    <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-                      {t.video.stat3P1}
-                      <span className="text-white font-semibold">{t.video.stat3Highlight}</span>
-                      {t.video.stat3P2}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* ── MARQUEE ── */}
-              <motion.div variants={fadeUp} custom={4} className="-mx-6 sm:-mx-10 lg:-mx-16">
-                <p className="text-center text-gray-600 text-xs uppercase tracking-widest mb-4 font-medium">{t.video.clients}</p>
-                <InfiniteMarquee />
-              </motion.div>
-
-              {/* ── VIDEO GRID ── */}
-              <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-                {[0, 1, 2].map((i) => <VideoCard key={i} index={i} t={t} />)}
-              </motion.div>
-
-            </div>
-          </div>
-
-          {/* divider */}
-          <div className="mt-20 border-t border-white/5" />
-        </AnimatedSection>
-
-        {/* ══════════ BLOCK 2: Contact ══════════ */}
+      <div className="relative max-w-6xl mx-auto">
+        {/* ══════════ Contact Section ══════════ */}
         <AnimatedSection>
           <motion.div variants={fadeUp} className="flex justify-center mb-6">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-600/15 border border-indigo-500/30 text-indigo-400 text-xs font-medium tracking-widest uppercase">
@@ -407,9 +155,14 @@ export default function ServicesAndContact({ lang = 'ru' }) {
             <motion.div
               variants={fadeUp}
               custom={3}
-              className="rounded-3xl bg-white/[0.03] border border-white/[0.07] backdrop-blur-sm p-8 sm:p-10"
+              className="rounded-3xl bg-white/[0.03] border border-white/[0.07] backdrop-blur-sm p-8 sm:p-10 shadow-xl relative overflow-hidden"
             >
-              <h3 className="text-xl font-semibold text-white mb-8">{t.contact.formTitle}</h3>
+              <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
+
+              <h3 className="text-xl font-semibold text-white mb-8 flex items-center gap-2.5">
+                <Terminal size={18} className="text-indigo-400" />
+                {t.contact.formTitle}
+              </h3>
 
               {isSuccess ? (
                 <motion.div
@@ -427,7 +180,7 @@ export default function ServicesAndContact({ lang = 'ru' }) {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <input type="hidden" name="access_key" value="b188129f-374f-4eee-aea5-6e7b8e3f7cc0" />
-                  <input type="hidden" name="subject" value="Новая заявка с портфолио" />
+                  <input type="hidden" name="subject" value="Новая заявка с портфолио (Frontend & AI Engineer)" />
                   <input type="checkbox" name="botcheck" className="hidden" />
 
                   {/* name */}
@@ -457,9 +210,10 @@ export default function ServicesAndContact({ lang = 'ru' }) {
                   {/* checkboxes */}
                   <div className="space-y-1.5">
                     <label className="block text-xs font-medium text-white/50 uppercase tracking-widest mb-3">{t.contact.serviceLabel}</label>
-                    <div className="space-y-3">
-                      <ServiceCheckbox id="service-web"   label={t.contact.serviceWeb} />
-                      <ServiceCheckbox id="service-video" label={t.contact.serviceVideo} />
+                    <div className="space-y-2.5">
+                      <ServiceCheckbox id="service-web" label={t.contact.serviceWeb} />
+                      <ServiceCheckbox id="service-ai" label={t.contact.serviceAI} />
+                      <ServiceCheckbox id="service-interactive" label={t.contact.serviceInteractive} />
                     </div>
                   </div>
 
@@ -512,16 +266,19 @@ export default function ServicesAndContact({ lang = 'ru' }) {
 
             {/* ── RIGHT: Direct Contacts ── */}
             <motion.div variants={fadeUp} custom={4} className="flex flex-col justify-center space-y-6">
-              <h3 className="text-xl font-semibold text-white">{t.contact.directTitle}</h3>
+              <h3 className="text-xl font-semibold text-white flex items-center gap-2.5">
+                <MessageSquare size={18} className="text-purple-400" />
+                {t.contact.directTitle}
+              </h3>
 
               {/* WhatsApp */}
               <motion.a
-                href={`https://wa.me/905384114970?text=${encodeURIComponent("Здравствуйте, Бексултан! Я по поводу разработки сайта...")}`}
+                href={`https://wa.me/77068669099?text=${encodeURIComponent(whatsappText)}`}
                 target="_blank"
                 rel="noreferrer"
                 whileHover={{ scale: 1.02, x: 4 }}
                 whileTap={{ scale: 0.97 }}
-                className="group flex items-center gap-5 p-5 sm:p-6 rounded-2xl bg-emerald-500/[0.08] border border-emerald-500/20 hover:bg-emerald-500/[0.14] hover:border-emerald-400/40 transition-all duration-300"
+                className="group flex items-center gap-5 p-5 sm:p-6 rounded-2xl bg-emerald-500/[0.08] border border-emerald-500/20 hover:bg-emerald-500/[0.14] hover:border-emerald-400/40 transition-all duration-300 select-none cursor-pointer"
               >
                 <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center shadow-[0_0_20px_rgba(34,197,94,0.2)]">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7 text-emerald-400">
@@ -530,31 +287,59 @@ export default function ServicesAndContact({ lang = 'ru' }) {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-white font-semibold text-base">WhatsApp</p>
-                  <p className="text-emerald-400/80 text-sm mt-0.5">+90 538 411 49 70</p>
+                  <p className="text-emerald-400/80 text-sm mt-0.5">+7 706 866 90 99</p>
                 </div>
                 <ChevronRight size={18} className="text-emerald-400/50 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all duration-300" />
               </motion.a>
 
-              {/* Email */}
-              <motion.a
-                href="mailto:b.bakytkaliyev@gmail.com"
-                target="_blank"
-                rel="noreferrer"
+              {/* Email (Copy to Clipboard) */}
+              <motion.button
+                type="button"
+                onClick={handleCopyEmail}
                 whileHover={{ scale: 1.02, x: 4 }}
                 whileTap={{ scale: 0.97 }}
-                className="group flex items-center gap-5 p-5 sm:p-6 rounded-2xl bg-indigo-500/[0.08] border border-indigo-500/20 hover:bg-indigo-500/[0.14] hover:border-indigo-400/40 transition-all duration-300"
+                className={`w-full text-left group flex items-center gap-5 p-5 sm:p-6 rounded-2xl transition-all duration-300 cursor-pointer select-none ${
+                  copied 
+                    ? "bg-emerald-500/[0.12] border border-emerald-500/40 shadow-[0_0_24px_rgba(16,185,129,0.2)]" 
+                    : "bg-indigo-500/[0.08] border border-indigo-500/20 hover:bg-indigo-500/[0.14] hover:border-indigo-400/40"
+                }`}
               >
-                <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center shadow-[0_0_20px_rgba(99,102,241,0.2)]">
-                  <Mail size={28} className="text-indigo-400" />
+                <div className={`flex-shrink-0 w-14 h-14 rounded-xl border flex items-center justify-center transition-all duration-300 ${
+                  copied
+                    ? "bg-emerald-500/20 border-emerald-500/40 shadow-[0_0_20px_rgba(16,185,129,0.3)]"
+                    : "bg-indigo-500/20 border-indigo-500/30 shadow-[0_0_20px_rgba(99,102,241,0.2)]"
+                }`}>
+                  {copied ? (
+                    <Check size={28} className="text-emerald-400" />
+                  ) : (
+                    <Mail size={28} className="text-indigo-400" />
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-white font-semibold text-base">Email</p>
-                  <p className="text-indigo-400/80 text-sm mt-0.5 truncate">b.bakytkaliyev@gmail.com</p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-white font-semibold text-base">Email</p>
+                    {copied && (
+                      <span className="px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 animate-pulse">
+                        {lang === 'ru' ? "Скопировано!" : "Copied!"}
+                      </span>
+                    )}
+                  </div>
+                  <p className={`text-sm mt-0.5 truncate transition-colors duration-200 ${
+                    copied ? "text-emerald-400 font-medium" : "text-indigo-400/80"
+                  }`}>
+                    b.bakytkaliyev@gmail.com
+                  </p>
                 </div>
-                <ChevronRight size={18} className="text-indigo-400/50 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all duration-300" />
-              </motion.a>
+                <div className="flex items-center">
+                  {copied ? (
+                    <Check size={18} className="text-emerald-400" />
+                  ) : (
+                    <Copy size={18} className="text-indigo-400/50 group-hover:text-indigo-400 group-hover:scale-110 transition-all duration-300" />
+                  )}
+                </div>
+              </motion.button>
 
-              {/* info note */}
+              {/* Technical Consultation Note */}
               <div className="rounded-2xl bg-white/[0.03] border border-white/[0.06] p-5">
                 <div className="flex gap-3 items-start">
                   <div className="w-8 h-8 mt-0.5 rounded-lg bg-indigo-500/15 border border-indigo-500/20 flex-shrink-0 flex items-center justify-center">
