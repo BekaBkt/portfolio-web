@@ -26,8 +26,10 @@ export const translations = {
         techDesc: "Архитектура стейт-машин и стриминг LLM",
         appStoreTop: "Download on the",
         appStoreBottom: "App Store",
+        webBtn: "Перейти на сайт",
         tags: ["React", "Rive", "LLM APIs", "Cursor", "Claude", "TypeScript", "Tailwind CSS"],
         link: "https://apps.apple.com/kz/app/ozzy-adhd-focus-pal/id6760987195",
+        webLink: "https://www.ozzyfocus.app/",
       },
       cards: [
         {
@@ -46,9 +48,9 @@ export const translations = {
           techDesc: "МОДУЛЬНАЯ АРХИТЕКТУРА",
         },
         {
-          title: "PDW",
-          desc: "Высоконагруженный веб-ресурс с интеграцией Headless CMS API и фокусом на оптимизацию метрик Core Web Vitals.",
-          techDesc: "HEADLESS CMS API",
+          title: "Ozzy Focus",
+          desc: "Официальный веб-сайт и посадочная платформа для AI-компаньона Ozzy. Адаптивная архитектура, интерактивный интерфейс и оптимизация конверсии.",
+          techDesc: "AI ИНТЕГРАЦИЯ & WEB-АРХИТЕКТУРА",
         }
       ]
     },
@@ -107,8 +109,10 @@ export const translations = {
         techDesc: "State-Machine Architecture & LLM Streaming",
         appStoreTop: "Download on the",
         appStoreBottom: "App Store",
+        webBtn: "Visit Website",
         tags: ["React", "Rive", "LLM APIs", "Cursor", "Claude", "TypeScript", "Tailwind CSS"],
         link: "https://apps.apple.com/kz/app/ozzy-adhd-focus-pal/id6760987195",
+        webLink: "https://www.ozzyfocus.app/",
       },
       cards: [
         {
@@ -127,9 +131,9 @@ export const translations = {
           techDesc: "MODULAR ARCHITECTURE",
         },
         {
-          title: "PDW",
-          desc: "High-load web resource integrated with Headless CMS API and tuned for optimal Core Web Vitals performance.",
-          techDesc: "HEADLESS CMS API",
+          title: "Ozzy Focus",
+          desc: "Official web platform and landing experience for the Ozzy AI focus companion. Responsive frontend architecture, interactive visual UI, and optimized conversion flow.",
+          techDesc: "AI INTEGRATION & WEB ARCHITECTURE",
         }
       ]
     },

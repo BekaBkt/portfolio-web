@@ -33,9 +33,9 @@ const techColors = {
   "Tailwind CSS": "bg-teal-500/10 border-teal-500/30 text-teal-400",
   "Framer Motion": "bg-pink-500/10 border-pink-500/30 text-pink-400",
   "Responsive Architecture": "bg-cyan-500/10 border-cyan-500/30 text-cyan-400",
-  "Headless CMS": "bg-amber-500/10 border-amber-500/30 text-amber-400",
   Git: "bg-orange-500/10 border-orange-500/30 text-orange-400",
   "Cursor & Claude": "bg-violet-500/10 border-violet-500/30 text-violet-300",
+  "AI Integration": "bg-emerald-500/10 border-emerald-500/30 text-emerald-400",
 };
 
 function TechBadge({ tech }) {
@@ -126,11 +126,13 @@ const baseProjects = [
     glow: "hover:shadow-[0_0_32px_rgba(34,211,238,0.18)]",
   },
   {
-    image: "/screenshots/pdw.jpg",
-    tags: ["React", "Headless CMS", "TypeScript"],
-    link: "https://pdw.snc.mybluehost.me/",
-    borderHover: "hover:border-rose-500/50",
-    glow: "hover:shadow-[0_0_32px_rgba(244,63,94,0.18)]",
+    image: "/screenshots/ozzy.png",
+    tags: ["React", "Tailwind CSS", "TypeScript"],
+    link: "https://www.ozzyfocus.app/",
+    borderHover: "hover:border-emerald-500/50",
+    glow: "hover:shadow-[0_0_32px_rgba(71,166,89,0.22)]",
+    imgClass: "object-cover",
+    imgStyle: { objectPosition: "center 30%" },
   },
 ];
 
@@ -247,8 +249,8 @@ function FeaturedOzzyCard({ t }) {
           ))}
         </div>
 
-        {/* 3. Official Apple "Download on the App Store" Badge */}
-        <div className="pt-3 flex justify-center w-full">
+        {/* 3. Official Apple "Download on the App Store" Badge & Web Link */}
+        <div className="pt-3 flex flex-wrap items-center justify-center gap-4 w-full">
           <motion.a
             href={ozzy.link || "https://apps.apple.com/kz/app/ozzy-adhd-focus-pal/id6760987195"}
             target="_blank"
@@ -263,6 +265,19 @@ function FeaturedOzzyCard({ t }) {
               className="h-[46px] sm:h-[52px] w-auto drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:brightness-110 transition-all duration-200"
             />
           </motion.a>
+          {ozzy.webLink && (
+            <motion.a
+              href={ozzy.webLink}
+              target="_blank"
+              rel="noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              className="inline-flex items-center gap-2 h-[46px] sm:h-[52px] px-5 rounded-2xl bg-white/[0.08] hover:bg-white/[0.14] border border-white/20 text-white text-sm font-semibold backdrop-blur-md transition-all duration-200 shadow-lg cursor-pointer select-none"
+            >
+              <span>{ozzy.webBtn}</span>
+              <ExternalLink size={15} className="text-[#47A659]" />
+            </motion.a>
+          )}
         </div>
       </div>
     </motion.div>
@@ -289,7 +304,8 @@ function ProjectCard({ project, index, t }) {
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.05]"
+          style={project.imgStyle}
+          className={`w-full h-full ${project.imgClass || "object-cover object-top"} transition-transform duration-500 group-hover:scale-[1.05]`}
         />
         {/* dark overlay on hover for readability */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
