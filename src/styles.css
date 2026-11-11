@@ -527,6 +527,8 @@ html.lenis body {
 .ozzy__window {
   position: relative;
   aspect-ratio: 16 / 11;
+  max-height: 82vh;
+  margin-inline: auto;
   border-radius: 32px;
   overflow: hidden;
   background: radial-gradient(120% 90% at 50% 100%, rgba(99, 199, 116, 0.22), rgba(14, 18, 46, 0.55) 60%);

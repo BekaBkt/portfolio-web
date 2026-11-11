@@ -10,30 +10,33 @@ import Work from "./components/Work.jsx";
 import Craft from "./components/Craft.jsx";
 import Contact from "./components/Contact.jsx";
 
+// English by default; Russian only if the visitor picked it themselves.
+const LANG_KEY = "lang-choice";
 function initialLang() {
   try {
-    const saved = localStorage.getItem("lang");
-    if (saved === "en" || saved === "ru") return saved;
+    if (localStorage.getItem(LANG_KEY) === "ru") return "ru";
   } catch {
     /* storage unavailable */
   }
-  const nav = (navigator.language || "en").toLowerCase();
-  return nav.startsWith("ru") || nav.startsWith("kk") ? "ru" : "en";
+  return "en";
 }
 
 export default function App() {
-  const [lang, setLang] = useState(initialLang);
+  const [lang, setLangState] = useState(initialLang);
   const t = content[lang];
+  const setLang = (next) => {
+    setLangState(next);
+    try {
+      localStorage.setItem(LANG_KEY, next);
+    } catch {
+      /* storage unavailable */
+    }
+  };
   useScrollEngine();
 
   useEffect(() => {
     document.documentElement.lang = lang;
     document.title = t.meta.title;
-    try {
-      localStorage.setItem("lang", lang);
-    } catch {
-      /* storage unavailable */
-    }
   }, [lang, t]);
 
   return (

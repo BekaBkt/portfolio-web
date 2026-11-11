@@ -3,13 +3,25 @@ import { useRive, Layout, Fit, Alignment } from "@rive-app/react-canvas";
 import { useScrub } from "../lib/scroll.js";
 import { links } from "../content.js";
 
-function OzzyRive() {
-  const { RiveComponent } = useRive({
+// Shows the whole artboard at its native proportions (no cropping, no stretching).
+function OzzyRive({ onAspect, settledRef }) {
+  const { rive, RiveComponent } = useRive({
     src: "/Ozzy.riv",
     stateMachines: "State Machine 1",
     autoplay: true,
-    layout: new Layout({ fit: Fit.Cover, alignment: Alignment.Center }),
+    layout: new Layout({ fit: Fit.Contain, alignment: Alignment.Center }),
   });
+
+  useEffect(() => {
+    if (!rive) return;
+    const w = rive.artboardWidth || (rive.bounds && rive.bounds.maxX - rive.bounds.minX);
+    const h = rive.artboardHeight || (rive.bounds && rive.bounds.maxY - rive.bounds.minY);
+    if (w > 0 && h > 0) onAspect(w / h);
+    // the window is tilted in 3D while it scrolls in; re-measure once it's flat
+    settledRef.current = () => rive.resizeDrawingSurfaceToCanvas();
+    requestAnimationFrame(() => rive.resizeDrawingSurfaceToCanvas());
+  }, [rive, onAspect, settledRef]);
+
   return <RiveComponent className="ozzy__rive" />;
 }
 
@@ -17,6 +29,9 @@ export default function Ozzy({ t }) {
   const ref = useRef(null);
   const stageRef = useRef(null);
   const [near, setNear] = useState(false);
+  const [aspect, setAspect] = useState(null);
+  const settledRef = useRef(null);
+  const wasFlat = useRef(false);
 
   // only download the Rive file once the section is close
   useEffect(() => {
@@ -36,6 +51,9 @@ export default function Ozzy({ t }) {
     const e = 1 - Math.pow(1 - t, 3);
     ref.current.style.setProperty("--tilt", e.toFixed(4));
     ref.current.style.setProperty("--drift", p.toFixed(4));
+    const flat = e > 0.999;
+    if (flat && !wasFlat.current && settledRef.current) settledRef.current();
+    wasFlat.current = flat;
   });
 
   return (
@@ -57,8 +75,8 @@ export default function Ozzy({ t }) {
         </div>
 
         <figure className="ozzy__stage" ref={stageRef}>
-          <div className="ozzy__window">
-            {near ? <OzzyRive /> : <div className="ozzy__rive" />}
+          <div className="ozzy__window" style={aspect ? { aspectRatio: String(aspect) } : undefined}>
+            {near ? <OzzyRive onAspect={setAspect} settledRef={settledRef} /> : <div className="ozzy__rive" />}
           </div>
           <figcaption className="ozzy__caption">{t.ozzy.caption}</figcaption>
         </figure>
