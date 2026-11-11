@@ -15,7 +15,7 @@
   --panel: rgba(14, 18, 46, 0.42);
   --ozzy: #63c774;
   --pad: clamp(20px, 5vw, 72px);
-  --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --serif: "Fraunces", "Literata", "Iowan Old Style", Georgia, serif;
   --sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --ease-out: cubic-bezier(0.16, 0.84, 0.12, 1);
   color-scheme: dark;
