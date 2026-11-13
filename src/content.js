@@ -1,10 +1,10 @@
 // All copy for the site, in English and Russian.
 
 export const projects = [
-  { id: "cosmo", image: "/work/cosmo.webp", link: "https://www.cosmocode.studio/", host: "cosmocode.studio", stack: ["React", "Tailwind CSS", "Framer Motion"] },
-  { id: "absolut", image: "/work/absolut.webp", link: "https://absalute.vercel.app/", host: "absalute.vercel.app", stack: ["React", "TypeScript", "Tailwind CSS"] },
-  { id: "era", image: "/work/era.webp", link: "https://www.eraophthalmica.com/", host: "eraophthalmica.com", stack: ["React", "Tailwind CSS"] },
-  { id: "ozzySite", image: "/work/ozzy-site.webp", link: "https://www.ozzyfocus.app/", host: "ozzyfocus.app", stack: ["React", "TypeScript", "Tailwind CSS"] },
+  { id: "cosmo", image: "/work/cosmo.webp", width: 1600, height: 927, link: "https://www.cosmocode.studio/", host: "cosmocode.studio", stack: ["React", "Tailwind CSS", "Framer Motion"] },
+  { id: "absolut", image: "/work/absolut.webp", width: 1600, height: 918, link: "https://absalute.vercel.app/", host: "absalute.vercel.app", stack: ["React", "TypeScript", "Tailwind CSS"] },
+  { id: "era", image: "/work/era.webp", width: 1600, height: 930, link: "https://www.eraophthalmica.com/", host: "eraophthalmica.com", stack: ["React", "Tailwind CSS"] },
+  { id: "ozzySite", image: "/work/ozzy-site.webp", width: 1600, height: 929, link: "https://www.ozzyfocus.app/", host: "ozzyfocus.app", stack: ["React", "TypeScript", "Tailwind CSS"] },
 ];
 
 export const links = {

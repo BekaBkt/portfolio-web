@@ -552,7 +552,7 @@ html.lenis body {
 /* ───────── work ───────── */
 .work {
   position: relative;
-  --pw: min(70vw, 1040px);
+  --pw: min(82vw, 1320px, calc((100svh - 300px) * 2.5));
 }
 .work__sticky {
   position: sticky;
@@ -593,14 +593,14 @@ html.lenis body {
 .panel {
   flex: 0 0 var(--pw);
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-  gap: clamp(20px, 2.6vw, 40px);
+  grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr);
+  gap: clamp(20px, 2.6vw, 44px);
   align-items: end;
   will-change: transform, opacity;
 }
 .panel__shot {
   display: block;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9.25;
   border-radius: 22px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -610,13 +610,11 @@ html.lenis body {
 .panel__shot img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: top;
-  transform: translate3d(calc(var(--parallax, 0) * -5%), 0, 0) scale(1.1);
-  transition: scale 0.8s var(--ease-out);
+  object-fit: contain;
+  transition: filter 0.5s var(--ease-out);
 }
 .panel__shot:hover img {
-  scale: 1.03;
+  filter: brightness(1.08);
 }
 .panel__info {
   text-shadow: 0 1px 14px rgba(4, 6, 22, 0.7);
@@ -961,9 +959,6 @@ html.lenis body {
   }
   .panel {
     grid-template-columns: 1fr;
-  }
-  .panel__shot img {
-    transform: none;
   }
   .craft__list {
     grid-template-columns: 1fr;

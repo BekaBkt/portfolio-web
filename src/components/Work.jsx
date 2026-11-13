@@ -69,7 +69,6 @@ export default function Work({ t }) {
         const a = Math.max(-1, Math.min(1, off));
         el.style.transform = `perspective(1400px) rotateY(${(-a * 16).toFixed(2)}deg) translateZ(${(-Math.abs(a) * 120).toFixed(1)}px)`;
         el.style.opacity = (1 - Math.min(0.55, Math.abs(a) * 0.6)).toFixed(3);
-        el.style.setProperty("--parallax", a.toFixed(4));
       });
       if (counterRef.current) counterRef.current.textContent = `${active + 1} ${t.work.of} ${projects.length}`;
     },
@@ -89,8 +88,16 @@ export default function Work({ t }) {
             const item = t.work.items[p.id];
             return (
               <article className="panel" key={p.id} ref={(el) => (panels.current[i] = el)}>
-                <a className="panel__shot" href={p.link} target="_blank" rel="noreferrer" tabIndex={-1} aria-hidden="true">
-                  <img src={p.image} alt="" loading="lazy" width="1600" height="925" />
+                <a
+                  className="panel__shot"
+                  href={p.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                  style={{ aspectRatio: `${p.width} / ${p.height}` }}
+                >
+                  <img src={p.image} alt="" loading="lazy" width={p.width} height={p.height} />
                 </a>
                 <div className="panel__info">
                   <h3 className="panel__title">{item.title}</h3>
